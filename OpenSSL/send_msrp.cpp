@@ -53,7 +53,6 @@ if (inet_aton(argv[1], (struct in_addr *) &dest.sin_addr.s_addr) == 0)
 }
 printf("address created\n");
 
-
 if (connect(sockfd, (struct sockaddr *) &dest, sizeof(dest)) != 0) 
 {
     perror("Connect ");
@@ -89,7 +88,7 @@ string contype("text/plain");
 string endch;
 
 fstream file;
-file.open("/root/OpenSSL/dd.cap");
+file.open("/root/OpenSSL/g711a.pcap");
 if(!file)
 {
     printf("open file failed!\n");
