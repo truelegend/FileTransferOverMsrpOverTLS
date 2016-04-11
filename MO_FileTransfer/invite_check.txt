@@ -1,0 +1,57 @@
+From:[ ].*sip:\+[0-9a-zA-Z]*@.*user=phone.*$==header
+From:[ ].*sip:\+[0-9a-zA-Z]*@.*$==header
+From:[ ].*sip:[0-9a-zA-Z]*@.*user=phone.*$==header
+From:[ ].*sip:[0-9a-zA-Z]*@.*$==header
+To:[ ].*sip:\+[0-9a-zA-Z]*@.*user=phone.*$==header
+To:[ ].*sip:\+[0-9a-zA-Z]*@.*$==header
+To:[ ].*sip:[0-9a-zA-Z]*@.*user=phone.*$==header
+To:[ ].*sip:[0-9a-zA-Z]*@.*$==header
+P-Asserted-Identity:[ ].*user=phone.*$==header
+P-Asserted-Identity:[ ].*$==header
+INVITE[ ]sip:[0-9a-zA-Z]*@.*SIP/2.0$==header
+INVITE[ ]sip:\+[0-9a-zA-Z]*@.*SIP/2.0$==header
+INVITE[ ]sip:[0-9a-zA-Z]*@.*gr=.*SIP/2.0$==header
+INVITE[ ]sip:\+[0-9a-zA-Z]*@.*gr=.*SIP/2.0$==header
+MESSAGE[ ]sip:[0-9a-zA-Z]*@.*SIP/2.0$==header
+MESSAGE[ ]sip:\+[0-9a-zA-Z]*@.*SIP/2.0$==header
+MESSAGE[ ]sip:[0-9a-zA-Z]*@.*gr=.*SIP/2.0$==header
+MESSAGE[ ]sip:\+[0-9a-zA-Z]*@.*gr=.*SIP/2.0$==header
+Privacy: none==header
+Reject-Contact==header
+Status: 000 200==header
+MSRP.*200==header
+Status: 000 [^2]==header
+IMDN-Record-Route==body
+IMDN-Route:==body
+From:[ ].*sip:\+[0-9a-zA-Z]*@.*user=phone.*$==body
+From:[ ].*sip:\+[0-9a-zA-Z]*@.*$==body
+From:[ ].*sip:[0-9a-zA-Z]*@.*user=phone.*$==body
+From:[ ].*sip:[0-9a-zA-Z]*@.*$==body
+To:[ ].*sip:\+[0-9a-zA-Z]*@.*user=phone.*$==body
+To:[ ].*sip:\+[0-9a-zA-Z]*@.*$==body
+To:[ ].*sip:[0-9a-zA-Z]*@.*user=phone.*$==body
+To:[ ].*sip:[0-9a-zA-Z]*@.*$==body
+Accept-Contact: \*;\+g\.oma\.sip-im$==header
+a=file-selector==body
+Accept-Contact: \*;\+g\.oma\.sip-im\.large-message==header
+Accept-Contact: \*;\+g\.3gpp\.iari-ref="urn%3Aurn-7%3A3gpp-application\.ims\.iari\.gsma-is"==header
+Accept-Contact: \*;\+g\.3gpp\.iari-ref="urn%3Aurn-7%3A3gpp-application\.ims\.iari\.gsma-vs"==header
+Accept-Contact: \*;\+g\.3gpp\.iari-ref="urn%3Aurn-7%3A3gpp-service\.ims\.icsi\.oma\.cpm\.filetransfer"==header
+Accept-Contact: \*;\+g\.3gpp\.iari-ref="urn%3Aurn-7%3A3gpp-service\.ims\.icsi\.oma\.cpm\.session"==header
+Accept-Contact: \*;\+g\.3gpp\.iari-ref="urn%3Aurn-7%3A3gpp-service\.ims\.icsi\.oma\.cpm\.largemsg"==header
+Accept-Contact: \*;\+g\.3gpp\.iari-ref="urn%3Aurn-7%3A3gpp-service\.ims\.icsi\.oma\.cpm\.systemmsg"==header
+^SIP/2.0 [3456]==header
+Path:==header
+Service-Route:==header
+P-Associated-URI:==header
+^Authorization:==header
+WWW-Authenticate:==header
+Proxy-Require:[ ]*sec-agree==header
+Require:[ ]*sec-agree==header
+P-Access-Network-Info:==header
+P-Access-Network-Info:.*;network-provided==header
+P-Charging-Function-Addresses:==header
+P-Charging-Vector:==header
+P-Media-Authorization:==header
+Feature-Caps:==header
+Via:.*,.*==header

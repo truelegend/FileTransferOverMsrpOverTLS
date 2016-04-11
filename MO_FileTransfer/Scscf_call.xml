@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE scenario SYSTEM "sipp.dtd">
+
+<scenario name="Basic Sipstone UAS">
+
+  <recv request="INVITE" rrs="true">
+  <action>
+  <ereg regexp=".*" header="CSeq: " search_in="hdr" assign_to="1" />
+  <ereg regexp="SIP/2.0/UDP .*" header="Via: " search_in="hdr" assign_to="2" />
+  <ereg regexp=".*" header="Record-Route: " search_in="hdr" assign_to="3" />
+  </action>
+  </recv>
+
+  <send>
+    <![CDATA[
+
+      SIP/2.0 100 Trying
+      Via: [$2]
+      [last_From:]
+      [last_To:]
+      [last_Call-ID:]
+      [last_CSeq:]
+      Content-Length: 0
+    ]]>
+  </send>
+
+<pause milliseconds="1000"/>
+
+ <send>
+    <![CDATA[
+
+      SIP/2.0 180 Ringing
+      Via: [$2]
+      Record-Route: <sip:[local_ip]:[local_port];lr>
+      Record-Route: [$3]
+      [last_From:]
+      [last_To:];tag=[pid]SCSCFMO[call_number]
+      [last_Call-ID:]
+      CSeq: [$1]
+      Contact: <sip:[local_ip]:[local_port]>
+      Content-Length: 0
+
+    ]]>
+ </send>
+
+<pause milliseconds="1000"/>
+  <send>
+    <![CDATA[
+
+      SIP/2.0 200 OK
+      Via: [$2]
+      Record-Route: <sip:[local_ip]:[local_port];lr>
+      Record-Route: [$3]
+      [last_From:]
+      [last_To:];tag=[pid]SCSCFMO[call_number]
+      [last_Call-ID:]
+      CSeq: [$1]
+      Contact: <sip:[local_ip]:[local_port]>
+      Content-Type: application/sdp
+      Content-Length: [len]
+
+      v=0
+      o=Rms-3-206-147-1-196895 320611474279238656 1835840333 IN IP4 [local_ip]
+      s=msrp
+      c=IN IP4 [local_ip]
+      t=0 0
+      m=message 2830 TCP/MSRP *
+      a=recvonly
+      a=accept-types:*
+      a=accept-wrapped-types:*
+      a=file-selector:name:"IMG_0299.PNG" type:image/* size:176419 hash:sha-1:CB:F2:EF:3D:DD:3C:BA:3D:21:6C:2F:A8:84:56:D4:48:83:6B:CB:D5
+      a=file-transfer-id:zFvmfp4CqKRi8SGWWwhQ4iXoPeqPrKT3
+      a=path:msrp://[local_ip]:2830/n14s00i3t0+2201;tcp
+      a=setup:passive
+    ]]>
+  </send>
+
+  <nop>
+    <action>
+      <exec command="pkill receive_msrp;nohup /root/OpenSSL/receive_msrp 10.2.13.20 2830 &"/> 
+    </action>
+  </nop>
+
+  <recv request="ACK">
+  </recv>
+  
+ 
+
+  <recv request="BYE">
+  </recv>
+
+   <send>
+    <![CDATA[
+
+      SIP/2.0 200 OK
+      [last_Via:]
+      [last_From:]
+      [last_To:]
+      [last_Call-ID:]
+      [last_CSeq:]
+      Content-Length: 0
+
+    ]]>
+  </send>
+   <nop>                                                                                                                                                                                                                  
+    <action>                                                                                                                                                                                                              
+    <exec command="pkill receive_msrp"/>
+      </action>                                                                                                                                                                                                             
+   </nop>    
+<!-- definition of the response time repartition table (unit is ms)   -->
+  <ResponseTimeRepartition value="10, 20, 30, 40, 50, 100, 150, 200"/>
+     
+<!-- definition of the call length repartition table (unit is ms)     -->
+  <CallLengthRepartition value="10, 50, 100, 500, 1000, 5000, 10000"/>
+
+</scenario>

@@ -1,0 +1,3 @@
+SERVER_SCRIPT=sipp_uas.sh:Scscf_call.xml
+CLIENT_SCRIPT=sipp_uac_pcap.sh:UE_MO_RTP.xml
+CHECK_LIST=invite_check.txt
